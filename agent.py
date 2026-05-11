@@ -5,6 +5,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 import google.generativeai as genai
+from dotenv import load_dotenv
 
 
 
@@ -22,8 +23,10 @@ ESCALATION_KEYWORDS = [
     "suspended", "aadhaar misuse", "data privacy", "cheated",
     "stolen", "fake", "scam"
 ]
+load_dotenv()
 
-client = genai.configure(api_key="AIzaSyBaIY2vMzjse3QxLo8nqYI9qYd_EXwhqRQ")  
+print(os.getenv("GEMINI_API_KEY"))
+
 
 
 # TOOL: Read Knowledge Base
@@ -237,13 +240,21 @@ DEMO_QUERIES = [
         "query_text": "How do I check my commission earnings for last month?",
         "channel": "app",
         "timestamp": datetime.now().isoformat()
-    }
+    },
+    {
+        "query_id": "Q005",
+        "partner_id": "FIN_P_5567",
+        "query_text": "My app keeps crashing when I try to open the AePS service. I have Android 5. Also my MPIN is not saving.",
+        "channel": "whatsapp",
+        "timestamp": datetime.now().isoformat()
+     }
+
 ]
 
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  Eko Customer Support Knowledge Agent — Demo Run")
+    print("   Customer Support Knowledge Agent — Demo Run")
     print("=" * 60)
 
     results = []
